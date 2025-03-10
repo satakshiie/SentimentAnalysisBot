@@ -27,7 +27,7 @@ an avid listener,a comfort giver-all in one.
 ## ⚠️ Note on Model File
 
 To keep the repo light, the `.gguf` model file is **excluded via `.gitignore`.**  
-You'll need to [download TinyLLaMA](https://huggingface.co/cg123/TinyLlama-1.1B-Chat-v1.0-GGUF) and place it in your `ai/` folder manually.
+You'll need to [download TinyLLaMA](https://huggingface.co/cg123/tinyllama-1.1b-chat-v1.0.Q5_K_M.gguf) and place it in your `ai/` folder manually.
 
 ---
 
