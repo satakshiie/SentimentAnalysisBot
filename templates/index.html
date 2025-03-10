@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sentiment Chatbot</title>
+  <style>
+    body {
+      background: linear-gradient(to right,#f080a9, #fce3ec, #ffe8ef);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+    }
+    .chat-box {
+      background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-height: 80vh;
+  padding: 20px;
+  overflow-y: auto;
+  text-align: center;
+    }
+    .message { margin-bottom: 10px; }
+    .user { color: #333; }
+    .bot { color: #0084ff; }
+    .sentiment { font-size: 0.9em; color: #cc8ee7; }
+    #chat-log{
+      padding-top: 0.5cm;
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-box">
+    <h2>🌸 Your Personal Therapist 🌸</h2>
+    <i>~Sentiment Analysis Chatbot~</i>
+
+    <div id="chat-log"></div>
+    <input type="text" id="user-input" placeholder="Type something..." style="width: 80%;">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const message = input.value.trim();
+      if (!message) return;
+
+      const chatLog = document.getElementById("chat-log");
+      chatLog.innerHTML += `<div class="message user"><strong>You:</strong> ${message}</div>`;
+      input.value = "";
+
+      fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        chatLog.innerHTML += `
+          <div class="message bot">
+            <strong>SentiBot:</strong> ${data.response}<br>
+            <span class="sentiment">[Sentiment: ${data.sentiment}]</span>
+          </div>
+        `;
+        chatLog.scrollTop = chatLog.scrollHeight;
+      });
+    }
+  </script>
+</body>
+</html>
