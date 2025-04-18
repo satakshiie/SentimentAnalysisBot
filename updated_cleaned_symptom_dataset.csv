@@ -1,0 +1,33 @@
+text,anxiety,depression,stress,anger,frustration
+I feel overwhelmed and my heart races all the time.,1,0,1,,
+"Nothing feels good anymore, I’m always sad.",0,1,0,,
+I have trouble sleeping and feel anxious all the time.,1,0,1,,
+I cry often and feel hopeless about life.,0,1,1,,
+Deadlines are stressing me out and I can’t focus.,1,0,1,,
+I feel nervous in social situations.,1,0,0,,
+I'm tired of everything and I don't see the point in trying.,0,1,0,,
+I’m constantly stressed about exams and future.,1,0,1,,
+I feel a tightness in my chest and worry a lot.,1,0,1,,
+Everything feels numb and I have no motivation.,0,1,1,,
+"I'm so angry, I just want to scream.",0,0,1,1.0,0.0
+Why does everything annoy me these days? It's so frustrating!,0,0,1,1.0,1.0
+"They never listen to me, and it makes me furious.",0,0,1,1.0,1.0
+I'm done pretending everything is okay when I'm clearly not.,0,1,1,1.0,1.0
+I get irritated at the smallest things lately.,0,0,1,1.0,1.0
+Every little mistake makes me lose my temper.,0,0,1,1.0,0.0
+It’s frustrating when nothing goes the way I plan.,0,0,1,0.0,1.0
+I feel like I’m going to explode from all the anger inside me.,0,0,1,1.0,0.0
+"I’m anxious and angry at the same time, it’s exhausting.",1,0,1,1.0,1.0
+"I feel sad, frustrated, and just want to disappear.",0,1,1,0.0,1.0
+My mind won’t stop racing and I’m always on edge.,1,0,1,0.0,1.0
+I want to cry and scream at the same time.,1,1,1,1.0,1.0
+"Hi there, how’s it going?",0,0,0,0.0,0.0
+Good morning! What’s your plan today?,0,0,0,0.0,0.0
+Hello! I just wanted to say hi.,0,0,0,0.0,0.0
+"I’m feeling okay today, nothing major going on.",0,0,0,0.0,0.0
+"I'm doing okay, just getting through the day.",0,0,0,0.0,0.0
+"Everything's fine, how about you?",0,0,0,0.0,0.0
+"Not much happening today, just relaxing.",0,0,0,0.0,0.0
+"It's a regular day, nothing special.",0,0,0,0.0,0.0
+"Feeling good, just enjoying the moment.",0,0,0,0.0,0.0
+"I'm alright, just taking it easy.",0,0,0,0.0,0.0

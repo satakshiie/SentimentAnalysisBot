@@ -32,6 +32,12 @@
       padding-top: 0.5cm;
       
     }
+    .symptoms {
+  color: #e07c7c;
+  font-style: italic;
+  display: inline-block;
+  margin-top: 4px;
+}
   </style>
 </head>
 <body>
@@ -49,11 +55,11 @@
       const input = document.getElementById("user-input");
       const message = input.value.trim();
       if (!message) return;
-
+  
       const chatLog = document.getElementById("chat-log");
       chatLog.innerHTML += `<div class="message user"><strong>You:</strong> ${message}</div>`;
       input.value = "";
-
+  
       fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -61,10 +67,16 @@
       })
       .then(res => res.json())
       .then(data => {
+        let symptomText = "";
+        if (data.symptoms && data.symptoms.length > 0) {
+          symptomText = `<br><span class="symptoms">[Detected Symptoms: ${data.symptoms.join(", ")}]</span>`;
+        }
+  
         chatLog.innerHTML += `
           <div class="message bot">
             <strong>SentiBot:</strong> ${data.response}<br>
             <span class="sentiment">[Sentiment: ${data.sentiment}]</span>
+            ${symptomText}
           </div>
         `;
         chatLog.scrollTop = chatLog.scrollHeight;
