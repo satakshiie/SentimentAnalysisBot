@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anxiety Relief</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,600&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: rgb(245, 220, 243);
+      color: #333;
+    }
+    .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li a {
+  text-decoration: none;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+.navbar li a:hover {
+  color: #ff791f;
+}
+
+    header {
+  background: linear-gradient(270deg, #ff9cfa, #de8aff, #9cfcff);
+  background-size: 700% 700%;
+  animation: gradientShift 10s ease infinite;
+  padding: 2rem;
+  text-align: center;
+  color: #000;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+      
+    }
+    .glass-card {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+    .section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 3rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .text-box {
+      flex: 1 1 48%;
+      padding: 1rem;
+    }
+
+    .text-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .text-box h3 {
+      font-style: italic;
+      margin: 0 0 1rem 0;
+      color: #555;
+      font-weight: 400;
+      font-size: 1.5rem;
+    }
+
+    .text-box p {
+      line-height: 1.6;
+    }
+
+    .button {
+      margin-top: 1.2rem;
+      display: inline-block;
+      background-color: #ffffff;
+      padding: 0.5rem 1.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .button:hover {
+      background-color: #d8d8d8;
+    }
+
+    .image-box {
+      flex: 1 1 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-box img {
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 10 20px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .image-box, .text-box {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+          <li><a href="{{ url_for('index') }}">Dashboard</a></li>
+          <li><a href="/stress-relief">Stress Relief Window</a></li>
+          <li><a href="/emergency">Emergency</a></li>
+          <li><a href="/settings">Settings</a></li>
+        </ul>
+      </nav>
+  <header>
+    <h1>Anxiety Relief Window</h1>
+    <p><i>Just Breathe...</i></p>
+  </header>
+  <div class="glass-card">
+  <section class="section">
+    <div class="text-box">
+      <h2><b>Breathing Exercises</b></h2>
+      <h3>why breathing exercises?</h3>
+      <p>Breathing exercises are important because they enhance lung function, improve overall respiratory health, and can reduce stress and anxiety. They help the lungs work more efficiently, increase oxygen intake, and improve circulation, leading to better physical and mental well-being.</p>
+      <div class="button">Try It Yourself</div>
+    </div>
+    <div class="image-box">
+        <img src="/static/yoga-illustration.png" alt="Yoga">
+    </div>
+  </section>
+</div>
+<div class="glass-card">
+  <section class="section">
+    <div class="text-box">
+      <h2>Journal</h2>
+      <h3>why journal?</h3>
+      <p>Journaling allows you to express your thoughts and emotions, process your feelings, and reflect on your experiences. It helps reduce anxiety and promotes self-awareness, mindfulness, and personal growth.</p>
+      <div class="button">Try It Yourself</div>
+    </div>
+    <div class="image-box">
+        <img src="{{ url_for('static', filename='journal.png') }}" alt="Journal">
+    </div>
+  </section>
+</div>
+<div class="glass-card">
+  <section class="section">
+    <div class="text-box">
+      <h2>Daily Affirmations</h2>
+      <h3>why daily affirmations?</h3>
+      <p>Daily affirmations can rewire negative thinking patterns, boost self-esteem, and instill a positive mindset. They serve as small daily reminders of your worth, helping to build emotional resilience and calm anxious thoughts.</p>
+      <div class="button">Try It Yourself</div>
+    </div>
+    <div class="image-box">
+        <img src="{{ url_for('static', filename='fortune-cookie.png') }}" alt="Fortune Cookie">
+    </div>
+  </section>
+</div>
+
+</body>
+</html>

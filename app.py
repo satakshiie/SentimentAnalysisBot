@@ -98,6 +98,17 @@ def chat():
         "sentiment": sentiment,
         "symptoms": symptoms
     })
+@app.route("/anxiety-relief")
+def anxietyrelief():
+    return render_template("anxietyrelief.html")
+
+@app.route("/emergency")
+def emergency():
+    return render_template("emergency.html")
+
+@app.route("/settings")
+def settings():
+    return render_template("settings.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

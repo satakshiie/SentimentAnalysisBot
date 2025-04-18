@@ -3,63 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <title>Sentiment Chatbot</title>
-  <style>
-    body {
-      background: linear-gradient(to right,#f080a9, #fce3ec, #ffe8ef);
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
-    }
-    .chat-box {
-      background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  max-height: 80vh;
-  padding: 20px;
-  overflow-y: auto;
-  text-align: center;
-    }
-    .message { margin-bottom: 10px; }
-    .user { color: #333; }
-    .bot { color: #0084ff; }
-    .sentiment { font-size: 0.9em; color: #cc8ee7; }
-    #chat-log{
-      padding-top: 0.5cm;
-      
-    }
-    .symptoms {
-  color: #e07c7c;
-  font-style: italic;
-  display: inline-block;
-  margin-top: 4px;
-}
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 <body>
-  <div class="chat-box">
-    <h2>🌸 Your Personal Therapist 🌸</h2>
-    <i>~Sentiment Analysis Chatbot~</i>
+  <div class="sidebar">
+    <h2>🌼 BloomBot</h2>
+    <a href="#tracker"><i class="fa-solid fa-chart-line"></i> Mood Tracker</a>
+    <a href="{{ url_for('anxietyrelief') }}">Anxiety Relief</a>
+    <a href="#stress"><i class="fa-solid fa-fire"></i> Stress Relief</a>
+    <a href="#hotlines"><i class="fa-solid fa-phone"></i> Hotlines</a>
+    <a href="#settings"><i class="fa-solid fa-gear"></i> Settings</a>
 
-    <div id="chat-log"></div>
-    <input type="text" id="user-input" placeholder="Type something..." style="width: 80%;">
-    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <div class="main-content">
+    <div class="chat-box" id="chat-log">
+      <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  
+  <!-- BloomBot Avatar Container -->
+  <div class="bloombot-avatar" id="bloombot-avatar">
+    <div class="bloombot-bubble" id="bloombot-bubble">Hi there! I'm BloomBot!</div>
+    <svg viewBox="0 0 441 428" fill="none" id="bloombot"
+      width="100%"
+      height="auto"
+      viewBox="0 0 441 428"
+      fill="none"
+      id="bloombot">
+      <!-- Left Arm -->
+      <ellipse
+        cx="88.1689"
+        cy="237.649"
+        rx="38.5"
+        ry="84.5"
+        fill="#E3A7FF"
+        id="left-arm"
+        transform="rotate(47.22 88.1689 237.649)"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Right Arm -->
+      <ellipse
+        cx="349.836"
+        cy="233.189"
+        rx="38.5"
+        ry="84.5"
+        fill="#E3A7FF"
+        id="right-arm"
+        transform="rotate(126.473 349.836 233.189)"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Body -->
+      <path
+        d="M336 254.669C336 303.64 283.393 428 218.5 428C153.607 428 101 303.64 101 254.669C101 205.699 153.607 166 218.5 166C283.393 166 336 205.699 336 254.669Z"
+        fill="url(#paint0_linear_294_1132)"
+        id="body"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Skirt -->
+      <path
+        d="M269 303.455C269 319.722 245.943 354 217.5 354C189.057 354 166 319.722 166 303.455C166 287.187 189.057 274 217.5 274C245.943 274 269 287.187 269 303.455Z"
+        fill="#E3A7FF"
+        id="skirt"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Left Antenna -->
+      <path
+        d="M96 0L106.392 72H85.6077L96 0Z"
+        fill="url(#paint1_linear_294_1132)"
+        id="left-antenna"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Left Hand -->
+      <rect
+        x="54"
+        y="54"
+        width="43"
+        height="89"
+        rx="20"
+        fill="url(#paint2_linear_294_1132)"
+        id="left-hand"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Right Antenna -->
+      <path
+        d="M341 0L351.392 72H330.608L341 0Z"
+        fill="url(#paint3_linear_294_1132)"
+        id="right-antenna"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Right Hand -->
+      <rect
+        x="340"
+        y="54"
+        width="43"
+        height="89"
+        rx="20"
+        fill="url(#paint4_linear_294_1132)"
+        id="right-hand"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Head -->
+      <ellipse
+        cx="219"
+        cy="109.5"
+        rx="131"
+        ry="109.5"
+        fill="url(#paint5_linear_294_1132)"
+        id="head"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Face -->
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M259.381 165.518C300.171 155.176 329 129.958 329 101.5C329 64.2208 279.527 34 218.5 34C157.473 34 108 64.2208 108 101.5C108 130.171 137.263 155.554 178.539 165.748C181.723 156.249 198.626 149 219 149C239.209 149 256.003 156.132 259.381 165.518Z"
+        fill="url(#paint6_linear_294_1132)"
+        id="face"
+        style="stroke:#000000;stroke-opacity:1" />
+      <circle cx="140" cy="120" r="20" fill="url(#blush-gradient)" id="left-blush" opacity="0"/>
+      <circle cx="295" cy="120" r="20" fill="url(#blush-gradient)" id="right-blush" opacity="0"/>
+
+      
+      <!-- Left Eye -->
+      <ellipse
+        cx="165.5"
+        cy="96"
+        rx="23.5"
+        ry="25"
+        fill="black"
+        id="left-eye"
+        style="stroke:#000000;stroke-opacity:1" />
+      
+      <!-- Right Eye -->
+      <ellipse
+        cx="270.5"
+        cy="96"
+        rx="23.5"
+        ry="25"
+        fill="black"
+        id="right-eye"
+        style="stroke:#000000;stroke-opacity:1" />
+
+      
+      <!-- Gradients -->
+      <defs>
+        <linearGradient id="paint0_linear_294_1132" x1="218.5" y1="166" x2="218.5" y2="428" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#FFB4F2"/>
+          <stop offset="1" stop-color="#00EEFF"/>
+        </linearGradient>
+        <linearGradient id="paint1_linear_294_1132" x1="96" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+          <stop stop-color="white"/>
+          <stop offset="1" stop-color="#FF8BEA"/>
+        </linearGradient>
+        <linearGradient id="paint2_linear_294_1132" x1="75.5" y1="54" x2="75.5" y2="143" gradientUnits="userSpaceOnUse">
+          <stop stop-color="white"/>
+          <stop offset="1" stop-color="#FF8BEA"/>
+        </linearGradient>
+        <linearGradient id="paint3_linear_294_1132" x1="341" y1="0" x2="341" y2="96" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#D9D9D9"/>
+          <stop offset="1" stop-color="#FF8BEA"/>
+        </linearGradient>
+        <linearGradient id="paint4_linear_294_1132" x1="361.5" y1="54" x2="361.5" y2="143" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#D9D9D9"/>
+          <stop offset="1" stop-color="#FF8BEA"/>
+        </linearGradient>
+        <linearGradient id="paint5_linear_294_1132" x1="219" y1="0" x2="219" y2="219" gradientUnits="userSpaceOnUse">
+          <stop offset="0.0769231" stop-color="#FFC9F5"/>
+          <stop offset="1" stop-color="#DE98FF"/>
+        </linearGradient>
+        <linearGradient id="paint6_linear_294_1132" x1="218.5" y1="34" x2="218.5" y2="165.748" gradientUnits="userSpaceOnUse">
+          <stop offset="0.139423" stop-color="#000000"/>
+          <stop offset="0.495192" stop-color="#00EEFF"/>
+          <stop offset="0.855769" stop-color="#000000"/>
+        </linearGradient>
+        <radialGradient id="blush-gradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FF69B4" stop-opacity="0.9"/> <!-- Darker pink -->
+            <stop offset="100%" stop-color="#FF69B4" stop-opacity="0.3"/> <!-- More visible fade -->
+          </radialGradient>
+      </defs>
+    </svg>
   </div>
 
   <script>
+    // Your existing chatbot function
     function sendMessage() {
       const input = document.getElementById("user-input");
       const message = input.value.trim();
       if (!message) return;
-  
+
       const chatLog = document.getElementById("chat-log");
       chatLog.innerHTML += `<div class="message user"><strong>You:</strong> ${message}</div>`;
       input.value = "";
-  
+
       fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -71,10 +213,10 @@
         if (data.symptoms && data.symptoms.length > 0) {
           symptomText = `<br><span class="symptoms">[Detected Symptoms: ${data.symptoms.join(", ")}]</span>`;
         }
-  
+
         chatLog.innerHTML += `
           <div class="message bot">
-            <strong>SentiBot:</strong> ${data.response}<br>
+            <strong>BloomBot:</strong> ${data.response}<br>
             <span class="sentiment">[Sentiment: ${data.sentiment}]</span>
             ${symptomText}
           </div>
@@ -82,6 +224,131 @@
         chatLog.scrollTop = chatLog.scrollHeight;
       });
     }
+
+    // BloomBot Animations
+    document.addEventListener('DOMContentLoaded', function() {
+      const avatar = document.getElementById('bloombot-avatar');
+      const bubble = document.getElementById('bloombot-bubble');
+      const robot = document.getElementById('bloombot');
+      
+      // Initialize arm positions
+      document.getElementById('right-arm').setAttribute('transform', 'rotate(126.473 349.836 233.189)');
+      document.getElementById('left-arm').setAttribute('transform', 'rotate(47.22 88.1689 237.649)');
+      
+      // Eye blink animation
+      function blinkEyes() {
+        anime({
+          targets: ['#left-eye', '#right-eye'],
+          scaleY: [0.6, 1],
+          scaleX: [1.05, 1],
+          duration: 200,
+          easing: 'easeInOutSine'
+        });
+      }
+      
+      // Blush effect
+      function showBlush() {
+        anime({
+          targets: ['#left-blush', '#right-blush'],
+          opacity: [0, 1],
+          duration: 600,
+          easing: 'easeOutQuad',
+          complete: () => {
+            anime({
+              targets: ['#left-blush', '#right-blush'],
+              opacity: 0,
+              duration: 1500
+            });
+          }
+        });
+      }
+
+
+      
+      // Arm wave animations
+      anime({
+        targets: '#right-arm',
+        rotate: [
+          { value: [126.473, 110], duration: 800 },
+          { value: [110, 140], duration: 800 }
+        ],
+        transformOrigin: ['349.836px 233.189px', '349.836px 233.189px'],
+        easing: 'easeInOutSine',
+        direction: 'alternate',
+        loop: true
+      });
+      
+      anime({
+        targets: '#left-arm',
+        rotate: [
+          { value: [47.22, 30], duration: 1000 },
+          { value: [30, 60], duration: 1000 }
+        ],
+        transformOrigin: ['88.1689px 237.649px', '88.1689px 237.649px'],
+        easing: 'easeInOutSine',
+        direction: 'alternate',
+        loop: true,
+        delay: 400
+      });
+      // Random animations
+      setInterval(blinkEyes, 3000 + Math.random() * 3000);
+      setInterval(showBlush, 5000 + Math.random() * 3000);
+      
+      // Show bubble on hover
+      
+      avatar.addEventListener('mouseenter', () => {
+        bubble.style.opacity = '1';
+        if(Math.random() > 0.7) showBlush();
+      });
+      
+      avatar.addEventListener('mouseleave', () => {
+        bubble.style.opacity = '0';
+      });
+      
+      // Make BloomBot interactive
+      avatar.addEventListener('click', () => {
+        showBlush();
+        blinkEyes();
+        bubble.textContent = ["How are you?", "Let's chat!", "I'm here to help!"][Math.floor(Math.random()*3)];
+        bubble.style.opacity = '1';
+        setTimeout(() => { bubble.style.opacity = '0' }, 3000);
+      });
+      robot.addEventListener('mouseenter', () => {
+  anime({
+    targets: robot,
+    translateY: -5, // Slight lift
+    scale: 1.02,   // Tiny enlargement
+    duration: 300,
+    easing: 'easeOutQuad'
+  });
+});
+
+// Return to normal
+robot.addEventListener('mouseleave', () => {
+  anime({
+    targets: robot,
+    translateY: 0,
+    scale: 1,
+    duration: 400,
+    easing: 'easeOutElastic'
+  });
+});
+
+// Optional: Add subtle floating animation when not hovering
+const floatAnimation = anime({
+  targets: robot,
+  translateY: ['15px', '-15px'],
+  duration: 2000,
+  direction: 'alternate',
+  loop: true,
+  easing: 'easeInOutSine',
+  autoplay: false
+});
+
+// Pause floating when hovered
+robot.addEventListener('mouseenter', () => floatAnimation.pause());
+robot.addEventListener('mouseleave', () => floatAnimation.play());
+    });
   </script>
 </body>
 </html>
