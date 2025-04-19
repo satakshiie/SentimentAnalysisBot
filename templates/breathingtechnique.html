@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>breathing technique</title>
+    </head>
+</html>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: #f8f1ff; /* soft pastel for your vibe */
+  font-family: 'Segoe UI', sans-serif;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #9303c8;
+  border-bottom: 2px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #7a4e9b;
+}
+
+.breathing-techniques-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #eae6ff;
+  border-radius: 20px;
+  padding: 30px 40px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  width: fit-content;         /* 👈 only as wide as content */
+  max-width: 90%;             /* 👈 prevent overflow on small screens */
+}
+.breathing-techniques-container h2{
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    margin: 0%;
+}
+.subtitle {
+    color: #6b6b8c;
+    margin-bottom: 1rem;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tab {
+    padding: 1.5rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    background: #e5deff;
+    color: #6a4fc9;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab.active {
+    background: #9b87f5;
+    color: white;
+}
+
+.technique-card {
+  display: none;
+  animation: fadeIn 0.5s ease-in-out;
+
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.15); /* Softer & brighter glass */
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+
+  padding: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 400px;
+
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.25);
+  color: #1a1a1a;
+  transition: all 0.3s ease-in-out;
+}
+.technique-card.active {
+    display: block;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.circle-animation {
+    width: 120px;
+    height: 120px;
+    border: 5px solid #000000;
+    border-radius: 50%;
+    margin: 1.5rem auto;
+    transition: transform 4s ease-in-out;
+}
+
+.instruction {
+    color: #6a4fc9;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.start-btn {
+    background: #9b87f5;
+    border: none;
+    padding: 0.7rem 2rem;
+    color: white;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+textarea {
+  width: 90%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  resize: none;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #b388ff;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #9a67ea;
+}
+.divider-with-label {
+  width: 100%;
+  text-align: center;
+  margin: 60px 0 40px;
+}
+
+.divider-with-label span {
+  display: inline-block;
+  padding: 0 16px;
+  font-weight: 500;
+  color: #7f6ecf;
+  position: relative;
+  font-size: 16px;
+}
+
+.divider-with-label span::before,
+.divider-with-label span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 2px;
+  background: #e1d7ff;
+}
+
+.divider-with-label span::before {
+  right: 100%;
+  margin-right: 16px;
+}
+
+.divider-with-label span::after {
+  left: 100%;
+  margin-left: 16px;
+}
+.reflection-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 60px auto;
+  max-width: 1100px;
+  padding: 0 20px;
+}
+.journal-container,
+.affirmation-box {
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 14px rgba(130, 130, 250, 0.1);
+  flex: 1 1 400px;  /* ✅ allow flexible width but grow nicely */
+  min-height: 300px;
+  max-width: 500px;
+  text-align: center;
+  background-color: #eae6ff;
+}
+.journal-container h2{
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+    margin: 0%;}
+
+.affirmation-box h2{
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+    margin: 0%;}
+
+
+#affirmationText {
+  margin-top: 20px;
+  font-style: italic;
+  color: #6e5dcf;
+  background-color: #fff3ff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  display: none;
+}
+#cookieImg {
+  width: 160px;
+  max-width: 200px;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* put transition here */
+}
+
+#cookieImg:hover {
+  transform: scale(1.1);
+}
+.popup-message {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: plum;
+  color: #000000;
+  padding: 10px 10px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  margin-top: 10px;
+  white-space: normal;
+  z-index: 10;
+  font-weight: 500;
+  font-size: 20px;
+  min-width: 300px;
+  height: 70px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 18px;
+  color: #d34fc7;
+  cursor: pointer;
+}
+</style>
+<body>
+    <header>
+        <div class="logo">🌸 BloomBot</div>
+    </header>
+<div class="breathing-techniques-container">
+    <h2>🌀 Breathing Techniques</h2>
+    <p class="subtitle">Select a technique to begin your breathing practice.</p>
+
+    <div class="tabs">
+        <button onclick="showTechnique('box')" class="tab active">Box Breathing</button>
+        <button onclick="showTechnique('478')" class="tab">4-7-8 Breathing</button>
+        <button onclick="showTechnique('belly')" class="tab">Belly Breathing</button>
+    </div>
+
+    <div id="technique-box" class="technique-card active">
+        <h3>Box Breathing</h3>
+        <p>Inhale, hold, exhale, hold – each for 4 seconds.</p>
+        <div class="circle-animation" id="circle-box"></div>
+        <p id="instruction-box" class="instruction">Get ready...</p>
+        <button class="start-btn" onclick="startBox()">Start</button>
+    </div>
+
+    <div id="technique-478" class="technique-card">
+        <h3>4-7-8 Breathing</h3>
+        <p>Inhale for 4, hold for 7, exhale for 8 seconds.</p>
+        <div class="circle-animation" id="circle-478"></div>
+        <p id="instruction-478" class="instruction">Get ready...</p>
+        <button class="start-btn" onclick="start478()">Start</button>
+    </div>
+
+    <div id="technique-belly" class="technique-card">
+        <h3>Belly Breathing</h3>
+        <p>Slow and deep into your belly for calm relaxation.</p>
+        <div class="circle-animation" id="circle-belly"></div>
+        <p id="instruction-belly" class="instruction">Get ready...</p>
+        <button class="start-btn" onclick="startBelly()">Start</button>
+    </div>
+</div>
+<div class="divider-with-label">
+    <span>↓ Reflect ↓</span>
+  </div>
+  <div class="reflection-section">
+<div id="journal-section" class="journal-container">
+    <h2>📝 Journal Your Thoughts</h2>
+    <p>Write down how you're feeling after your breathing session.</p>
+    <textarea id="journalEntry" placeholder="Dear me, today I feel..." rows="6"></textarea>
+    <button onclick="saveJournal()">Save Entry</button>
+    <div id="savedEntries"></div>
+  </div>
+
+  <div class="affirmation-box">
+    <h2>🥠 Your Daily Affirmation</h2>
+    <p>Click the cookie to reveal your affirmation!</p>
+    <img src="/static/lala.png" id="cookieImg"/>
+    <p id="affirmationText">🌟 You are amazing just as you are. 🌟</p>
+    <div class="popup-message" id="popupMessage">
+        <span class="close-btn" id="closePopup">&times;</span>
+        <p id="popupText"></p> <!-- This will hold the dynamic affirmation -->
+      </div>
+    
+    <div id="popupContainer" class="hidden">
+      <div class="popup-message" id="popupMessage">
+        <span class="close-btn" id="closePopup">&times;</span>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+<script>
+function showTechnique(id) {
+    document.querySelectorAll('.technique-card').forEach(card => card.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    document.getElementById('technique-' + id).classList.add('active');
+    document.querySelector(`[onclick="showTechnique('${id}')"]`).classList.add('active');
+}
+
+// Animation logic
+function animateBreath(circle, instructions, steps) {
+    let i = 0;
+    const cycle = () => {
+        if (i >= steps.length) return;
+        const [text, time] = steps[i];
+        instructions.innerText = text;
+        circle.style.transform = (text.includes("Inhale") || text.includes("Breathe in")) ? "scale(1.3)" : "scale(1)";
+        setTimeout(() => {
+            i++;
+            cycle();
+        }, time * 1000);
+    };
+    cycle();
+}
+
+function startBox() {
+    animateBreath(document.getElementById('circle-box'), document.getElementById('instruction-box'), [
+        ["Inhale...", 4],
+        ["Hold...", 4],
+        ["Exhale...", 4],
+        ["Hold...", 4]
+    ]);
+}
+
+function start478() {
+    animateBreath(document.getElementById('circle-478'), document.getElementById('instruction-478'), [
+        ["Inhale for 4", 4],
+        ["Hold for 7", 7],
+        ["Exhale for 8", 8]
+    ]);
+}
+
+function startBelly() {
+    animateBreath(document.getElementById('circle-belly'), document.getElementById('instruction-belly'), [
+        ["Breathe in deeply...", 4],
+        ["Hold it...", 2],
+        ["Exhale slowly...", 6]
+    ]);
+}
+function saveJournal() {
+  const entry = document.getElementById("journalEntry").value;
+  if (!entry.trim()) {
+    alert("Please write something before saving.");
+    return;
+  }
+const saved = document.createElement("div");
+  saved.className = "journal-entry";
+  saved.innerHTML = `<p>${entry}</p><hr>`;
+  document.getElementById("savedEntries").prepend(saved);
+  document.getElementById("journalEntry").value = "";
+}
+
+const affirmations = [
+  "You are braver than you believe.",
+  "Today is full of possibilities.",
+  "You are doing better than you think.",
+  "Small steps make big changes.",
+  "You deserve good things.",
+  "Believe in your inner light.",
+  "Your feelings are valid.",
+  "Kindness begins with you."
+];
+
+const cookie = document.getElementById("cookieImg");
+const popup = document.getElementById("popupMessage");
+const popupText = document.getElementById("popupText");
+const close = document.getElementById("closePopup");
+
+cookie.addEventListener("click", () => {
+  const randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+  popupText.textContent = "🌟 " + randomAffirmation + " 🌟";
+  popup.style.display = "block";
+});
+
+close.addEventListener("click", () => {
+  popup.style.display = "none";
+});
+</script>
+</body>

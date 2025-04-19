@@ -109,6 +109,10 @@ def emergency():
 @app.route("/settings")
 def settings():
     return render_template("settings.html")
+    
+@app.route('/breathingtechnique')
+def breathingtechnique():
+    return render_template('breathingtechnique.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
